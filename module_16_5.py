@@ -14,7 +14,7 @@ users = []
 
 
 class User(BaseModel):
-    id: int = None
+    id: int
     username: str
     age: int
 
@@ -24,7 +24,7 @@ def get_all_messages(request: Request) -> HTMLResponse:
     return templates.TemplateResponse('users.html', {'request': request, 'users': users})
 
 
-@app.get(path='/user/{user_id}')
+@app.get(path='/get/{user_id}')
 async def get_all_users(request: Request, user_id: int) -> HTMLResponse:
     try:
         return templates.TemplateResponse('users.html', {'request': request, 'user': users[user_id - 1]})
@@ -32,7 +32,7 @@ async def get_all_users(request: Request, user_id: int) -> HTMLResponse:
         raise HTTPException(status_code=404, detail='User was not found')
 
 
-@app.post('/user/{username}/{age}')
+@app.post('/post/{username}/{age}')
 async def create_user(username: str, age: int) -> User:
     user_id = len(users) + 1
     user = User(id=user_id, username=username, age=age)
@@ -62,3 +62,4 @@ async def delete_user(user_id: int) -> List[User]:
             raise HTTPException(status_code=404, detail='User was not found')
     except IndexError:
         raise HTTPException(status_code=404, detail='User was not found')
+
