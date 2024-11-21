@@ -6,7 +6,7 @@
     <br>
     <h2> ID: {{user.id}} </h2>
     <p>
-        <strong> Text: {{user.username}} </strong>
+        <strong> Text: {{user.id}} </strong>
     </p>
 </article>
 
@@ -18,7 +18,7 @@
     <div class="card">
         <ul class="list-group list-group-flush">
             {% for user in users %}
-            <li class="list-group-item"> {{user.id}} <a href="/get/{user_id}"> {{user.username}} </a></li>
+            <li class="list-group-item"> {{user.id}} <a href="/get/user/{{user.id}}"> {{user.username}} </a></li>
             {% endfor %}
         </ul>
     </div>
